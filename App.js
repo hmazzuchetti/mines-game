@@ -4,8 +4,8 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
-
 import params from './src/params';
+import Field from './src/Components/Field';
 
 const App = () => {
 
@@ -16,7 +16,9 @@ const App = () => {
       <Text style={styles.sectionTitle}> Mines start! </Text>
       <Text style={styles.highlight}> 
         {params.getRowsAmount()} X {params.getColumnsAmount()}
-        </Text>
+      </Text>
+
+      <Field />
     </SafeAreaView>
   );
 };
