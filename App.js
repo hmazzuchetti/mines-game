@@ -20,6 +20,8 @@ const App = () => {
 
       <Field />
       <Field opened />
+      <Field opened mined />
+      <Field opened mined exploded/>
       <Field opened nearMines={1} />
       <Field opened nearMines={2} />
       <Field opened nearMines={3} />
