@@ -1,64 +1,63 @@
-import React from 'react';
+import { React, Component } from 'react';
 import {
   SafeAreaView,
+  View,
   StyleSheet,
   Text,
 } from 'react-native';
 import params from './src/params';
 import Field from './src/Components/Field';
-import Flag from './src/Components/Flag';
+import MineField from './src/Components/MineField';
+import { createMinedBoard } from './src/functions';
+import Mine from './src/Components/Mine';
 
-const App = () => {
+export default class App extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = this.createState();
+  }
 
+  cols = params.getColumnsAmount();
+  rows = params.getRowsAmount();
 
-  return (
-    <SafeAreaView style={styles.sectionContainer}>
-      <Text style={styles.sectionTitle}> Mines start! </Text>
-      <Text style={styles.highlight}> 
+  minesAmount = () =>{
+
+    return Math.ceil(this.cols * this.rows * params.difficultLevel);
+  }
+
+  createState = () =>{
+    return {
+      board: createMinedBoard(this.rows, this.cols, this.minesAmount()),
+      won: false,
+      lost: false,
+      showLevelSelection: false,
+    }
+  }
+
+  render () {return (
+    <SafeAreaView style={styles.container}>
+      <Text> Mines start! </Text>
+      <Text> 
         {params.getRowsAmount()} X {params.getColumnsAmount()}
       </Text>
 
-      <Field />
-      <Field opened />
-      <Field opened mined />
-      <Field flagged />
-      <Field opened mined exploded/>
-      <Field opened nearMines={1} />
-      <Field opened nearMines={2} />
-      <Field opened nearMines={3} />
-      <Field opened nearMines={4} />
-      <Field opened nearMines={5} />
-      <Field opened nearMines={6} />
-      <Field opened nearMines={7} />
-      <Field opened nearMines={8} />
-      {/* <Flag />
-      <Flag bigger/> */}
+      <View style ={styles.board}>
+        <MineField board={this.state.board}/>
+      </View>
     </SafeAreaView>
-  );
+  )};
 };
 
 const styles = StyleSheet.create({
-
-  sectionContainer: {
+  container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
+    padding: 10,
+  },
+  board: {
     alignItems: 'center',
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+    backgroundColor: '#AAA'
+  }
 });
 
-export default App;
