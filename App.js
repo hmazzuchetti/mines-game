@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import params from './src/params';
 import Field from './src/Components/Field';
+import Flag from './src/Components/Flag';
 
 const App = () => {
 
@@ -31,6 +32,8 @@ const App = () => {
       <Field opened nearMines={6} />
       <Field opened nearMines={7} />
       <Field opened nearMines={8} />
+      {/* <Flag />
+      <Flag bigger/> */}
     </SafeAreaView>
   );
 };
